@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youpii ?</title>
+
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+</head>
+<body>
+    <audio src="montagnefinal.mp3" id="audio-player-1"></audio>
+    <audio src="audiotable.mp3" id="audio-player-2"></audio>
+    <audio src="youpiville.mp3" id="audio-player-3"></audio>
+    <audio src="audioforet.mp3" id="audio-player-4"></audio>
+    <audio src="audiogrotte.mp3" id="audio-player-5"></audio>
+    <audio src="merfinal.mp3" id="audio-player-6"></audio>
+    <audio src="kalimbafinal.mp3" id="audio-player-7"></audio>
+    
+    <a-scene mindar-image="imageTargetSrc: targets.mind; maxTrack: 7" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      <a-assets>
+        <img id="card" crossorigin="anonymous" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.png" />
+        <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0" id="target-1">
+        <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 1" id="target-2">
+        <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+      </a-entity>
+       <a-entity mindar-image-target="targetIndex: 2" id="target-3">
+        <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+      </a-entity>
+       <a-entity mindar-image-target="targetIndex: 3" id="target-4">
+        <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+      </a-entity>
+       <a-entity mindar-image-target="targetIndex: 4" id="target-5">
+        <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+      </a-entity>
+       <a-entity mindar-image-target="targetIndex: 5" id="target-6">
+        <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+      </a-entity>
+       <a-entity mindar-image-target="targetIndex: 6" id="target-7">
+        <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+      </a-entity>
+       <a-entity mindar-image-target="targetIndex: 7" id="target-8">
+        <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+      </a-entity>
+    </a-scene>
+</body>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+    "mindar-image-three":"https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
+  }
+}
+</script>
+
+<script type="module">
+  import * as THREE from 'three';
+  import { MindARThree } from 'mindar-image-three';
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+	const sceneEl = document.querySelector('a-scene');
+
+	let arSystem;
+
+	sceneEl.addEventListener('loaded', function () {
+	  arSystem = sceneEl.systems["mindar-image-system"];
+	});
+
+	const target1 = document.querySelector('#target-1');
+  const target2 = document.querySelector('#target-2');
+  const target3 = document.querySelector('#target-3');
+  const target4 = document.querySelector('#target-4');
+  const target5 = document.querySelector('#target-5');
+  const target6 = document.querySelector('#target-6');
+  const target7 = document.querySelector('#target-7');
+
+	const audioPlayer1 = document.querySelector('#audio-player-1');
+	const audioPlayer2 = document.querySelector('#audio-player-2');
+  const audioPlayer3 = document.querySelector('#audio-player-3');
+	const audioPlayer4 = document.querySelector('#audio-player-4');
+  const audioPlayer5 = document.querySelector('#audio-player-5');
+	const audioPlayer6 = document.querySelector('#audio-player-6');
+  const audioPlayer7 = document.querySelector('#audio-player-7');
+
+    
+	// arReady event triggered when ready
+	sceneEl.addEventListener("arReady", (event) => {
+	  console.log("MindAR is ready")
+	});
+	// arError event triggered when something went wrong. Mostly browser compatbility issue
+	sceneEl.addEventListener("arError", (event) => {
+	  console.log("MindAR failed to start")
+	});
+
+	// detect target found
+	target1.addEventListener("targetFound", event => {
+	    console.log("target found");
+        audioPlayer1.play();
+	});
+	// detect target lost
+	target1.addEventListener("targetLost", event => {
+	    console.log("target lost");
+        audioPlayer1.pause();
+	});
+
+	// detect target found
+	target2.addEventListener("targetFound", event => {
+	    console.log("target found");
+        audioPlayer2.play();
+	});
+	// detect target lost
+	target2.addEventListener("targetLost", event => {
+	    console.log("target lost");
+        audioPlayer2.pause();
+	});
+
+  // detect target found
+	target3.addEventListener("targetFound", event => {
+	    console.log("target found");
+        audioPlayer3.play();
+	});
+	// detect target lost
+	target3.addEventListener("targetLost", event => {
+	    console.log("target lost");
+        audioPlayer3.pause();
+	});
+
+  // detect target found
+	target4.addEventListener("targetFound", event => {
+	    console.log("target found");
+        audioPlayer4.play();
+	});
+	// detect target lost
+	target4.addEventListener("targetLost", event => {
+	    console.log("target lost");
+        audioPlayer4.pause();
+	});
+
+  // detect target found
+	target5.addEventListener("targetFound", event => {
+	    console.log("target found");
+        audioPlayer5.play();
+	});
+	// detect target lost
+	target5.addEventListener("targetLost", event => {
+	    console.log("target lost");
+        audioPlayer5.pause();
+	});
+
+  // detect target found
+	target6.addEventListener("targetFound", event => {
+	    console.log("target found");
+        audioPlayer6.play();
+	});
+	// detect target lost
+	target6.addEventListener("targetLost", event => {
+	    console.log("target lost");
+        audioPlayer6.pause();
+	});
+
+  // detect target found
+	target7.addEventListener("targetFound", event => {
+	    console.log("target found");
+        audioPlayer7.play();
+	});
+	// detect target lost
+	target7.addEventListener("targetLost", event => {
+	    console.log("target lost");
+        audioPlayer7.pause();
+	});
+});
+      
+</script>
+
+</html>
